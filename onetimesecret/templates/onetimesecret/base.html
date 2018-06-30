@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% load static %}
+{% if 'use_i18n'|bootstrap_setting %}
+    {% load i18n %}
+    {% get_current_language as LANGUAGE_CODE %}
+{% endif %}
+<html lang="{{ LANGUAGE_CODE|default:'en_us' }}">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% trans "Burn After Reading" %}</title>
+
+    {% bootstrap_css %}
+
+    {% if 'javascript_in_head'|bootstrap_setting %}
+        {% bootstrap_javascript 'full' %}
+    {% endif %}
+
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "onetimesecret/css/onetimesecret.css" %}">
+
+    {% block extra_head %}{% endblock %}
+
+</head>
+
+<body>
+    {% block extra_before_body %}{% endblock %}
+
+    <main role="main" class="container container-small">
+        {% block onetimesecret_main %}{% endblock %}
+    </main>
+
+    {% if not 'javascript_in_head'|bootstrap_setting %}
+        {% bootstrap_javascript 'full' %}
+    {% endif %}
+
+{#    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>#}
+
+    {% block extra_after_body %}{% endblock %}
+
+</body>
+
+</html>

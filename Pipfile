@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+django-webtest = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-sugar = "*"
+pytest-coverage = "*"
+coverage = "*"
+pytest-pythonpath = "*"
+pytest-cov = "*"
+flit = "*"
+factory-boy = "*"
+pytest-factoryboy = "*"
+"flake8" = "*"
+black = "*"
+bumpversion = "*"
+freezegun = "*"
+
+[packages]
+django = ">=2.0,<2.1"
+django-extensions = "*"
+cryptography = "*"
+django-bootstrap4 = "*"
+django-model-utils = "*"
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true

@@ -1,0 +1,85 @@
+{% extends 'onetimesecret/base.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block onetimesecret_main %}
+
+    <h1 class="mt-5">{% trans "Burn After Reading" %}</h1>
+    
+    <p>{% trans "Your secret message has been recorded. Please copy the following URL immediately, because we will show it only once. It will be gone if you reload the browser window." %}</p>
+
+    <div class="input-group" style="margin-bottom: 20px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Secret link</span>
+        </div>
+        <input id="url-to-secret" type="text" class="form-control"
+               value="{{ secret.url|default:"* * * * * * * * * * * * * * * * * * * * * * * * * * *" }}"
+               style="background-color: yellow; font-size: 12px">
+        {% if secret %}
+            <div class="input-group-append">
+                <button class="btn" id="url-to-secret-button"
+                        data-clipboard-target="#url-to-secret"
+                        title="{% trans "Copied!" %}">
+                    <img src="{% static 'onetimesecret/images/clippy.svg'%}" alt="{% trans "Copy to clipboard" %}" width="13">
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if secret %}
+        <p style="margin-top: 20px;">
+            {% blocktrans trimmed with lifetime_display=secret.lifetime_display expiration_date=secret.expiration_date|date:"Y-m-d@H:i:s" %}
+                The secret expires in {{ lifetime_display }} ({{ expiration_date }} UTC). It cannot be viewed after. In fact, it will look like the secret never existed at all.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+    
+    <p>{% trans "That's it. We are all done here." %}</p>
+
+    <hr>
+
+    <p class="text-center">
+        <a href="/" class="btn-primary btn-lg btn-block">{% trans "Record another secret message" %}</a>
+    </p>
+
+
+    <h2>F.A.Q</h2>
+
+    <p>{% trans "We're glad you asked." %}</p>
+
+    <h3>{% trans "Why do you show me the link to the secret message only once?" %}</h3>
+    <p>
+        {% blocktrans trimmed %}
+            The link to the secret message is shown only once in case someone gets access to this private
+            page (in your browser history or if you accidentally send the link to this page instead of the
+            link to the secret in the box above).
+        {% endblocktrans %}
+    </p>
+
+    {% if secret %}
+        <h3>{% trans "How long will the secret be available?" %}</h3>
+        <p>
+        {% blocktrans trimmed with lifetime_display=secret.lifetime_display %}
+            The secret will be available for {{ lifetime_display }} or until it has been viewed.
+        {% endblocktrans %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block extra_after_body %}
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
+    <script type="text/javascript">
+        new ClipboardJS('#url-to-secret-button');
+    </script>
+    <script src="https://unpkg.com/tippy.js@2.5.3/dist/tippy.all.min.js"></script>
+    <script type="text/javascript">
+        tippy('#url-to-secret-button', {
+            arrow: true,
+            placement: 'bottom',
+            trigger: 'click',
+        })
+    </script>
+{% endblock %}

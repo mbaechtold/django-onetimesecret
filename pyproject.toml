@@ -1,0 +1,21 @@
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = [
+    "django-bootstrap4",
+    "django-extensions",
+    "cryptography",
+    "django-model-utils",
+    "pytz",
+]
+packages = [
+    { include = "onetimesecret" },
+]
+
+[tool.flit.metadata]
+module = "onetimesecret"
+author = "Martin Baechtold"
+author-email = "nomail@localhost"
+home-page = "https://github.com/mbaechtold/django-onetimesecret"
+requires-python = ">=3.6"
