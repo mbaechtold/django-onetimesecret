@@ -6,6 +6,22 @@ only be viewed once. It will be burnt once it has been read. You may consider it
 like a self-destructing message.
 
 
+## Demo
+
+You can run a demo of the app with `Docker` and `Docker Compose`:
+
+    docker-compose build
+    docker-compose up
+    
+Then visit `http://localhost:8080` in your browser.
+
+You may even create a superuser inside the Docker machine if you want to access the Django admin site:
+
+    docker exec -it django-onetimesecret-django bash
+    export PYTHONPATH="${PROJECT_ROOT}/example/:${PYTHONPATH}" 
+    python example/manage.py createsuperuser
+
+
 ## Requirements
 
 This is an add-on for Django and requires Django >= 2.0 and Python >= 3.6.

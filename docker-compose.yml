@@ -1,0 +1,34 @@
+version: '2'
+services:
+
+  django:
+    container_name: django-onetimesecret-django
+    build:
+      context: .
+    networks:
+      - django-onetimesecret-django-nginx
+    volumes:
+      - django-onetimesecret-django-static:/usr/src/app/static
+    ports:
+      - 8008:8000
+
+  nginx:
+    container_name: django-onetimesecret-nginx
+    build:
+      context: ./docker-utils/nginx
+      dockerfile: nginx.dockerfile
+    networks:
+      - django-onetimesecret-django-nginx
+    volumes:
+      - django-onetimesecret-django-static:/usr/src/app/static
+    ports:
+      - 8080:80
+    depends_on:
+      - django
+
+volumes:
+  django-onetimesecret-django-static:
+
+networks:
+  django-onetimesecret-django-nginx:
+    driver: bridge
