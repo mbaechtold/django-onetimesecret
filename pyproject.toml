@@ -2,20 +2,23 @@
 line-length = 100
 
 [build-system]
-requires = [
-    "django-bootstrap4",
-    "django-extensions",
-    "cryptography",
-    "django-model-utils",
-    "pytz",
-]
+requires = ["flit"]
+build-backend = "flit.buildapi"
 packages = [
     { include = "onetimesecret" },
 ]
 
 [tool.flit.metadata]
 module = "onetimesecret"
+dist-name = "django-onetimesecret"
 author = "Martin Baechtold"
 author-email = "nomail@localhost"
 home-page = "https://github.com/mbaechtold/django-onetimesecret"
 requires-python = ">=3.6"
+requires = [
+    "django-bootstrap4",
+    "django-extensions",
+    "cryptography",
+    "django-model-utils",
+    "pytz"
+]
