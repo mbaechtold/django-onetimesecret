@@ -3,6 +3,8 @@ line-length = 100
 
 [build-system]
 requires = [
+    "setuptools",
+    "wheel",
     "django-bootstrap4",
     "django-extensions",
     "cryptography",
